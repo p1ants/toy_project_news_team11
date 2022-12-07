@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/all.min.css">
+
+    
+    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>스파르타 뉴스</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+            crossorigin="anonymous"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css">
+
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"
+    ></script>
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+      
+        
+        body {
+          font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+        }
+        .my-title {
+
+            margin: 0px auto 0px auto;
+            height: 80px;
+            width: 90%;
+            max-width: 100vmax ;
+              
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            vertical-align: middle;
+
+            /* display: flex;
+            line-height: 80px;
+            justify-content: center;
+            align-items: center;
+            vertical-align: middle; */
+            
+        }
+        
+
+        h1 {
+            width: 50%;
+        }
+
+        .wrapdark {
+            width: 100px;
+            justify-content: center;
+            align-items: center;
+            /*background-color: red;*/
+            position: absolute;
+            display: block;
+            right: 10%;
+            padding: 0;
+            height: auto;
+        }
+
+        .jbFixed {
+            width: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+        }
+
+        body {
+            background-color: mistyrose;
+        }
+
+        /* .wrap {
+            z-index: 2;
+            width: max;
+            max-height: 100px;
+            height: 80%;
+            background-color: white;
+            margin-bottom: 20px;
+        } */
+
+        .top-bar {
+            z-index: 2;
+            /* max-width: 1000px; */
+            width: 100%;
+            /* max-height: 100px; */
+            height: 90px;
+            background-color: white;
+            
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin: 0px 0px 30px 0px;
+        }
+
+        .top-bar > a {
+            color: black;
+            font-size:  2vw;
+            margin: 0px 1px 0px 1px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .wrap2 {
+            z-index: 1;
+            padding: 10px 5px auto 5px;
+            margin: auto 20px auto 20px;
+        }
+
+        .btn:hover {
+            cursor: pointer;
+            background-color: gray;
+            
+            border-radius: 5px;
+        }
+
+        .col:hover {
+            filter: brightness(120%) opacity(80%);
+        }
+
+        /* html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        } */
+
+
+        body[data-darkmode=on] {
+            background-color: #1e1f21;
+            color: #ffffff !important;
+        }
+
+        body[data-darkmode=on] {
+            --bg-color: black;
+        }
+
+
+        body[data-darkmode=on] .darkmode > .inner {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+
+        .darkmode > .inner {
+            position: relative;
+            display: inline-flex;
+            padding: 5px;
+            border-radius: 1.5em;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .darkmode label {
+            cursor: pointer;
+        }
+
+        .darkmode label:first-of-type {
+            padding: 5px 5px 5px 10px;
+            border-radius: 50% 0 0 50%;
+        }
+
+        .darkmode label:last-of-type {
+            padding: 5px 10px 5px 5px;
+            border-radius: 0 50% 50% 0;
+        }
+
+        .darkmode i {
+            font-size: 1.5em;
+            color: #aaa;
+        }
+
+        .darkmode input[type=radio] {
+            display: none;
+        }
+
+        .darkmode input[type=radio]:checked + label > i {
+            color: #fff;
+            transition: all 0.35s ease-in-out;
+        }
+
+        .darkmode .darkmode-bg {
+            width: 39px;
+            height: 34px;
+            position: absolute;
+            left: 5px;
+            border-radius: 50px 15px 15px 50px;
+            z-index: -1;
+            transition: all 0.35s ease-in-out;
+            background-color: #03af94;
+        }
+
+        #toggle-radio-dark:checked ~ .darkmode-bg {
+            border-radius: 15px 50px 50px 15px;
+            top: 5px;
+            left: 44px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            var jbOffset = $('.top-bar').offset();
+            $(window).scroll(function () {
+                if ($(document).scrollTop() > jbOffset.top) {
+                    $('.top-bar').addClass('jbFixed');
+                } else {
+                    $('.top-bar').removeClass('jbFixed');
+                }
+            });
+        });
+
+        function politics() {
+            $('#cards-box').empty();
+            $.ajax({
+                type: 'GET',
+                url: '/politics',
+                data: {},
+                success: function (response) {
+                    let rows = response['politicsList'];
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['politics_title'];
+                        let image = rows[i]['politics_image'];
+                        let desc = rows[i]['politics_desc'];
+                        let link = rows[i]['politics_link'];
+
+                        let temp_html = `<div class="col" >
+                                          <div OnClick=" window.open('${link}')" style="cursor:pointer;" class="card h-100">
+                                              <img src="${image}"
+                                                   class="card-img-top" style="background-color: var(--bg-color);">
+                                              <div class="card-body" style="background-color: var(--bg-color);">
+                                                  <h5 class="card-title">${title}</h5>
+                                                  <p class="card-text">${desc}</p>
+                                              </div>
+                                          </div>
+                                       </div>`;
+                        $('#cards-box').append(temp_html);
+                    }
+                },
+            });
+        }
+
+        function economy() {
+            $('#cards-box').empty();
+            $.ajax({
+                type: 'GET',
+                url: '/economy',
+                data: {},
+                success: function (response) {
+                    let rows = response['economyList'];
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['economy_title'];
+                        let image = rows[i]['economy_image'];
+                        let desc = rows[i]['economy_desc'];
+                        let link = rows[i]['economy_link'];
+
+                        let temp_html = `<div class="col" >
+                                          <div OnClick=" window.open('${link}')" style="cursor:pointer;" class="card h-100">
+                                              <img src="${image}"
+                                                   class="card-img-top" style="background-color: var(--bg-color);">
+                                              <div class="card-body" style="background-color: var(--bg-color);">
+                                                  <h5 class="card-title">${title}</h5>
+                                                  <p class="card-text">${desc}</p>
+                                                 
+                                              </div>
+                                          </div>
+                                       </div>`;
+                        $('#cards-box').append(temp_html);
+                    }
+                },
+            });
+        }
+
+        function gloBal() {
+            $('#cards-box').empty();
+            $.ajax({
+                type: 'GET',
+                url: '/gloBals',
+                data: {},
+                success: function (response) {
+                    let rows = response['gloBalList'];
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['gloBal_title'];
+                        let image = rows[i]['gloBal_image'];
+                        let desc = rows[i]['gloBal_desc'];
+                        let link = rows[i]['gloBal_link'];
+
+                        let temp_html = `<div class="col" >
+                                          <div OnClick=" window.open('${link}')" style="cursor:pointer;" class="card h-100">
+                                              <img src="${image}"
+                                                   class="card-img-top" style="background-color: var(--bg-color);">
+                                              <div class="card-body" style="background-color: var(--bg-color);">
+                                                  <h5 class="card-title">${title}</h5>
+                                                  <p class="card-text">${desc}</p>
+                                                 
+                                              </div>
+                                          </div>
+                                       </div>`;
+                        $('#cards-box').append(temp_html);
+                    }
+                },
+            });
+        }
+
+        function culture() {
+            $('#cards-box').empty();
+            $.ajax({
+                type: 'GET',
+                url: '/culture',
+                data: {},
+                success: function (response) {
+                    let rows = response['cultureList'];
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['culture_title'];
+                        let image = rows[i]['culture_image'];
+                        let desc = rows[i]['culture_desc'];
+                        let link = rows[i]['culture_link'];
+
+                        let temp_html = `<div class="col" >
+                                          <div OnClick=" window.open('${link}')" style="cursor:pointer;" class="card h-100">
+                                              <img src="${image}"
+                                                   class="card-img-top" style="background-color: var(--bg-color);">
+                                              <div class="card-body" style="background-color: var(--bg-color);">
+                                                  <h5 class="card-title">${title}</h5>
+                                                  <p class="card-text">${desc}</p>
+                                                 
+                                              </div>
+                                          </div>
+                                       </div>`;
+                        $('#cards-box').append(temp_html);
+                    }
+                },
+            });
+        }
+
+        function tech() {
+            $('#cards-box').empty();
+            $.ajax({
+                type: 'GET',
+                url: '/tech',
+                data: {},
+                success: function (response) {
+                    let rows = response['techList'];
+                    for (let i = 0; i < rows.length; i++) {
+                        let title = rows[i]['tech_title'];
+                        let image = rows[i]['tech_image'];
+                        let desc = rows[i]['tech_desc'];
+                        let link = rows[i]['tech_link'];
+                        
+
+                        let temp_html = `<div class="col" >
+                                          <div OnClick=" window.open('${link}')" style="cursor:pointer;" class="card h-100">
+                                              <img src="${image}"
+                                                   class="card-img-top" style="background-color: var(--bg-color);">
+                                              <div class="card-body" style="background-color: var(--bg-color);">
+                                                  <h5 class="card-title">${title}</h5>
+                                                  <p class="card-text">${desc}</p>
+                                                 
+                                              </div>
+                                          </div>
+                                       </div>`;
+                        $('#cards-box').append(temp_html);
+                    }
+                },
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (document.querySelector('.darkmode')) {
+                if (localStorage.getItem("darkmode") == 'on') {
+                    document.body.dataset.darkmode = 'on';
+                    document.querySelector('#toggle-radio-dark').checked = true;
+                }
+                document.querySelector('.darkmode').addEventListener("click", e => {
+                    if (e.target.classList.contains('todark')) {
+                        document.body.dataset.darkmode = 'on';
+                        localStorage.setItem("darkmode", "on");
+                    } else if (e.target.classList.contains('tolight')) {
+                        document.body.dataset.darkmode = 'off';
+                        localStorage.setItem("darkmode", "off");
+                    }
+                }, false);
+            } else {
+                localStorage.removeItem("darkmode");
+            }
+
+        })
+    </script>
+</head>
+
+<body>
+
+
+
+
+<div class="my-title">
+    
+        <h1>SPARTA NEWS</h1>
+
+        <div class="wrapdark">
+            <div class="darkmode">
+                <div class="inner">
+                    <input type="radio" name="toggle" id="toggle-radio-light" checked>
+                    <label for="toggle-radio-light" class="tolight">
+                        <i class="fas fa-sun tolight"> </i>
+                    </label>
+                    <input type="radio" name="toggle" id="toggle-radio-dark">
+                    <label for="toggle-radio-dark"
+                           class="todark">
+                        <i class="fas fa-moon todark"></i>
+                    </label>
+                    <div class="darkmode-bg"></div>
+                </div>
+            </div>
+        </div>
+        
+</div>
+
+
+
+
+<div class="wrap">
+    <div class="top-bar">
+        <a class="btn" onclick="politics()">⚖정치</a>
+        <a class="btn" onclick="economy()">💰경제</a>
+        <a class="btn" onclick="gloBal()">🌏세계</a>
+        <a class="btn" onclick="tech()">🤖테크</a>
+        <a class="btn" onclick="culture()">🎥문화</a>
+    </div>
+</div>
+
+<div class="wrap2">
+    <div class="mycards">
+        <div class="row row-cols-1 row-cols-md-5 g-4" id="cards-box">
+            <div class="col">
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
